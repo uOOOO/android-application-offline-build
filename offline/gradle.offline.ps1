@@ -47,8 +47,11 @@ function createOptionNode($xml) {
 function setOptionNodeAttribute($node) {
     $node.SetAttribute("name", "COMMAND_LINE_OPTIONS")
     unsetOptionNodeAttribute($node)
-    $value = $node.GetAttribute("value")
-    $value = "$value".trim() + " --init-script init.gradle.kts"
+    $value = $node.GetAttribute("value").trim()
+    if ($value -and $value.Length -gt 0) {
+        $value = "$value" + " "
+    }
+    $value = "$value" + "--init-script init.gradle.kts"
     $node.SetAttribute("value", $value)
 }
 

@@ -21,4 +21,22 @@ initscript {
             }
         }
     }
+
+    fun setSystemEnv(key: String, value: String) {
+        val processEnvironmentClass = Class.forName("java.lang.ProcessEnvironment")
+        processEnvironmentClass.getDeclaredField("theEnvironment").apply {
+            isAccessible = true
+            @Suppress("UNCHECKED_CAST")
+            val env = get(null) as MutableMap<Any, Any>
+            env[key] = value
+        }
+        processEnvironmentClass.getDeclaredField("theCaseInsensitiveEnvironment").apply {
+            isAccessible = true
+            @Suppress("UNCHECKED_CAST")
+            val env = get(null) as MutableMap<Any, Any>
+            env[key] = value
+        }
+    }
+
+    setSystemEnv("GRADLE_LIBS_REPO_OVERRIDE", "$sourceFile\\.gradle\\m2")
 }

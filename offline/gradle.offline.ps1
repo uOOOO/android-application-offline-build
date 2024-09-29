@@ -136,6 +136,14 @@ function off() {
     }
 }
 
+function gradleOffline([bool]$on) {
+    if ($on) {
+        on
+    } else {
+        off
+    }
+}
+
 function createMavenLocal {
     .\gradlew -b local.maven.gradle.kts createMavenLocal
 }
@@ -144,20 +152,20 @@ function archiveMavenLocal {
     .\gradlew -b local.maven.gradle.kts archiveMavenLocal
 }
 
-if (!$args) {
-    echo "No argument. Please enter argument 'on' or 'off'."
-    return
-}
-
-$arg = $args[0]
-
-if ($arg -ne "on" -and $arg -ne "off") {
-    echo "Wrong argument. Please enter argument 'on' or 'off'."
-    return
-}
-
-if ($arg -eq "on") {
-    on
-} elseif ($arg -eq "off") {
-    off
-}
+# if (!$args) {
+#     echo "No argument. Please enter argument 'on' or 'off'."
+#     return
+# }
+#
+# $arg = $args[0]
+#
+# if ($arg -ne "on" -and $arg -ne "off") {
+#     echo "Wrong argument. Please enter argument 'on' or 'off'."
+#     return
+# }
+#
+# if ($arg -eq "on") {
+#     on
+# } elseif ($arg -eq "off") {
+#     off
+# }
